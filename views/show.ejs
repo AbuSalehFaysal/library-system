@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">
+        <%= blog.title %> 
+    </div>
+    <div class="ui top attached">
+        <div class="item">
+            <img class="ui centered rounded image" src="<%= blog.image %>" alt="">
+            <div class="content"><span><%= blog.created.toDateString() %> </span></div>
+        </div>
+        <div class="description">
+            <p><%- blog.body %> </p>
+        </div>
+        <% if (currentUser) { %>
+            <% if (currentUser.usertype == 'Librerian') { %>
+                <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/edit">EDIT</a>
+                <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="POSt">
+                    <button class="ui inverted red button">DELETE</button>
+                </form> 
+            <% } else if(currentUser.usertype == 'Student') { %>
+                <a class="ui inverted primary button" href="#">REQUEST THIS BOOK</a>
+            <% } %>
+        <% } %>
+        
+    </div> 
+</div>
+<%- include('partials/footer') %>
