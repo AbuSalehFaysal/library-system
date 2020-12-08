@@ -24,7 +24,7 @@
                     <button class="ui inverted red button">DELETE</button>
                 </form> 
             <% } else if(currentUser.usertype == 'Student') { %>
-                <a class="ui inverted primary button" href="#">REQUEST THIS BOOK</a>
+                <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/request">REQUEST THIS BOOK</a>
             <% } %>
         <% } %>
         

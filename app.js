@@ -171,6 +171,17 @@ app.get("/blogs/:id/edit", isLoggedIn, function (req, res) {
   });
 });
 
+app.get("/blogs/:id/request", isLoggedIn, function (req, res) {
+  Blog.findById(req.params.id, function (err, foundBlog) {
+    if (err) {
+      console.log(err);
+      res.redirect("/blogs");
+    } else {
+      res.render("request", { blog: foundBlog });
+    }
+  });
+});
+
 app.get("/blogs/:id/deactivate", isLoggedIn, function (req, res) {
   Blog.findById(req.params.id, function (err, foundBlog) {
     if (err) {
