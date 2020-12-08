@@ -171,6 +171,28 @@ app.get("/blogs/:id/edit", isLoggedIn, function (req, res) {
   });
 });
 
+app.get("/blogs/:id/deactivate", isLoggedIn, function (req, res) {
+  Blog.findById(req.params.id, function (err, foundBlog) {
+    if (err) {
+      console.log(err);
+      res.redirect("/blogs");
+    } else {
+      res.render("deactivate", { blog: foundBlog });
+    }
+  });
+});
+
+app.get("/blogs/:id/activate", isLoggedIn, function (req, res) {
+  Blog.findById(req.params.id, function (err, foundBlog) {
+    if (err) {
+      console.log(err);
+      res.redirect("/blogs");
+    } else {
+      res.render("activate", { blog: foundBlog });
+    }
+  });
+});
+
 //UPDATE ROUTE
 app.put("/blogs/:id", function (req, res) {
   req.body.blog.body = req.sanitize(req.body.blog.body);
@@ -198,7 +220,7 @@ app.delete("/blogs/:id", isLoggedIn, function (req, res) {
   });
 });
 
-app.listen(5000, function () {
+app.listen(7000, function () {
   console.log("Server Has Started!!!");
 });
 

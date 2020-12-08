@@ -2,7 +2,11 @@
 <div class="ui main text container">
   <div class="ui huge header">Welcome to History Blog</div>
   <div class="ui divided items">
+    
+     
+    
     <% blogs.forEach(blog => { %>
+    
     <div class="item">
       <div class="image">
         <img src="<%= blog.image %> " alt="" />
@@ -25,7 +29,9 @@
         </div>
       </div>
     </div>
+    
     <% }) %>
+    
   </div>
 </div>
 <%- include('partials/footer') %>

@@ -5,8 +5,20 @@
     </div>
     <form class="ui form" action="/blogs/<%= blog._id %>?_method=PUT" method="POST">
         <div class="field">
-            <label for="">Title</label>
+            <label for="">Book Name</label>
             <input type="text" name="blog[title]" value="<%= blog.title %>">
+        </div>
+        <div class="field">
+            <label for="">Author</label>
+            <input type="text" name="blog[author]" value="<%= blog.author %>">
+        </div>
+        <div class="field">
+            <label for="">Genre</label>
+            <input type="text" name="blog[genre]" value="<%= blog.genre %>">
+        </div>
+        <div class="field">
+            <label for="">Release Date</label>
+            <input type="text" name="blog[releasedate]" value="<%= blog.releasedate %>">
         </div>
         <div class="field">
             <label for="">Image URL</label>
@@ -15,6 +27,10 @@
         <div class="field">
             <label for="">Description</label>
             <textarea name="blog[body]" id="" rows="5"><%= blog.body %></textarea>
+        </div>
+        <div class="field">
+            <label for="">Status</label>
+            <input type="text" name="blog[status]" value="<%= blog.status %>">
         </div>
         <input class="ui secondary button" type="submit" value="SUBMIT">
     </form>
