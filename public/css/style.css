@@ -4,3 +4,8 @@
 #delete {
   display: inline;
 }
+.ui.inverted.segment, .ui.primary.inverted.segment {
+  background: #072b4f;
+  color: rgba(255,255,255,.9);
+}
+

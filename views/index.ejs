@@ -8,33 +8,33 @@
         <img src="<%= blog.image %> " alt="" />
       </div>
       <div class="content">
-        <a class="header" href="/blogs/<%= blog._id %>"><%= blog.title %></a>
-        <a class="header" href="/blogs/<%= blog._id %>"><%= blog.author %></a>
-        <a class="header" href="/blogs/<%= blog._id %>"><%= blog.genre %></a>
-        <a class="header" href="/blogs/<%= blog._id %>"><%= blog.releasedate %></a>
+        <a class="header" href="/blogs/<%= blog._id %>">Name: <%= blog.title %></a><br> 
+        <a class="header" href="/blogs/<%= blog._id %>">Author: <%= blog.author %></a><br>
+        <a class="header" href="/blogs/<%= blog._id %>">Genre: <%= blog.genre %></a><br>
+        <a class="header" href="/blogs/<%= blog._id %>">Release Date: <%= blog.releasedate %></a>
         <div class="meta">
-          <span><%= blog.created.toDateString() %></span>
+          <span>Information Updated at: <%= blog.created.toDateString() %></span>
         </div>
         <div class="description">
           <p><%- blog.body.substring(0,100) %>...</p>
         </div>
         <div class="extra">
-          <a class="ui inverted violet button" href="/blogs/<%= blog._id %>"
+          <a class="ui blue button" href="/blogs/<%= blog._id %>"
             >View Book<i class="arrow alternate circle right icon"></i
           ></a>
           <% if (currentUser) { %>
             <% if (currentUser.usertype == 'Librerian') { %>
-                <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/edit">EDIT</a>
+                <a class="ui teal button" href="/blogs/<%= blog._id %>/edit">Edit</a>
                 <% if (blog.status === 'Active') { %>
-                    <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/deactivate">Deactivate</a>
+                    <a class="ui grey button" href="/blogs/<%= blog._id %>/deactivate">Deactivate</a>
                 <% } else { %>
-                    <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/activate">Activate</a>
+                    <a class="ui green button" href="/blogs/<%= blog._id %>/activate">Activate</a>
                 <% } %> 
                 <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="POSt">
-                    <button class="ui inverted red button">DELETE</button>
+                    <button class="ui red button">DELETE</button>
                 </form> 
             <% } else if(currentUser.usertype == 'Student') { %>
-                <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/request">REQUEST THIS BOOK</a>
+                <a class="ui green button" href="/blogs/<%= blog._id %>/request">Request This Book</a>
             <% } %>
         <% } %>
         </div>
@@ -44,7 +44,7 @@
   </div>
   <% if (currentUser) { %>
     <% if (currentUser.usertype == 'Student') { %>
-      <a class="ui inverted primary button" href="blogs/allbooks">REQUEST ALL BOOKS</a> 
+      <a class="ui teal button" href="blogs/allbooks">REQUEST ALL BOOKS</a> 
     <% } %>
   <% } %>
 </div>

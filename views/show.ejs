@@ -14,17 +14,17 @@
         </div>
         <% if (currentUser) { %>
             <% if (currentUser.usertype == 'Librerian') { %>
-                <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/edit">EDIT</a>
+                <a class="ui teal button" href="/blogs/<%= blog._id %>/edit">Edit</a>
                 <% if (blog.status === 'Active') { %>
-                    <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/deactivate">Deactivate</a>
+                    <a class="ui grey button" href="/blogs/<%= blog._id %>/deactivate">Deactivate</a>
                 <% } else { %>
-                    <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/activate">Activate</a>
+                    <a class="ui green button" href="/blogs/<%= blog._id %>/activate">Activate</a>
                 <% } %> 
                 <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="POSt">
-                    <button class="ui inverted red button">DELETE</button>
+                    <button class="ui red button">DELETE</button>
                 </form> 
             <% } else if(currentUser.usertype == 'Student') { %>
-                <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/request">REQUEST THIS BOOK</a>
+                <a class="ui green button" href="/blogs/<%= blog._id %>/request">REQUEST THIS BOOK</a>
             <% } %>
         <% } %>
         

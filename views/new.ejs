@@ -28,9 +28,12 @@
             <label for="">Description</label>
             <textarea name="blog[body]" id="" rows="5"></textarea>
         </div>
-        <div class="field">
+        <div class="inline fields">
             <label for="">Status</label>
-            <input type="text" name="blog[status]" placeholder="Active or Inactive">
+            <input type="radio" name="blog[status]" value="Active">
+            <label for="">Active</label>
+            <input type="radio" name="blog[status]" value="Inactive">
+            <label for="">Inactive</label>
         </div>
         <input class="ui secondary button" type="submit" value="SUBMIT">
     </form>

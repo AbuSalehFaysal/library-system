@@ -3,10 +3,17 @@
     <div class="ui huge header">
         Register as a Librerian / Student
     </div>
+    <ul>
+        <li>Register as a Librerian for Insert, Update, Delete, Activate and Deactivate Any Book Data</li>
+        <li>Register as a Student for Request  a book or All the Books</li>
+    </ul>
     <form class="ui form" action="/blogs/register" method="POST">
-        <div class="field">
+        <div class="inline fields">
             <label for="">User Type</label>
-            <input name="usertype" type="text" name="" placeholder="User Type">
+            <input type="radio" name="usertype" value="Librerian">
+            <label for="">Librerian</label>
+            <input type="radio" name="usertype" value="Student">
+            <label for="">Student</label>
         </div>
         <div class="field">
             <label for="">Username or Email</label>
@@ -18,5 +25,6 @@
         </div>
         <input class="ui secondary button" type="submit" value="SUBMIT">
     </form>
+    <p>Already have an account, then <a href="/blogs/login">Login</a></p>
 </div>
 <%- include('partials/footer') %>
