@@ -1,12 +1,8 @@
 <%- include('partials/header') %>
 <div class="ui main text container">
-  <div class="ui huge header">Welcome to History Blog</div>
+  <div class="ui huge header">Library Management System</div>
   <div class="ui divided items">
-    
-     
-    
     <% blogs.forEach(blog => { %>
-    
     <div class="item">
       <div class="image">
         <img src="<%= blog.image %> " alt="" />
@@ -24,14 +20,32 @@
         </div>
         <div class="extra">
           <a class="ui inverted violet button" href="/blogs/<%= blog._id %>"
-            >Read More<i class="arrow alternate circle right icon"></i
+            >View Book<i class="arrow alternate circle right icon"></i
           ></a>
+          <% if (currentUser) { %>
+            <% if (currentUser.usertype == 'Librerian') { %>
+                <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/edit">EDIT</a>
+                <% if (blog.status === 'Active') { %>
+                    <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/deactivate">Deactivate</a>
+                <% } else { %>
+                    <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/activate">Activate</a>
+                <% } %> 
+                <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="POSt">
+                    <button class="ui inverted red button">DELETE</button>
+                </form> 
+            <% } else if(currentUser.usertype == 'Student') { %>
+                <a class="ui inverted primary button" href="/blogs/<%= blog._id %>/request">REQUEST THIS BOOK</a>
+            <% } %>
+        <% } %>
         </div>
       </div>
     </div>
-    
     <% }) %>
-    
   </div>
+  <% if (currentUser) { %>
+    <% if (currentUser.usertype == 'Student') { %>
+      <a class="ui inverted primary button" href="blogs/allbooks">REQUEST ALL BOOKS</a> 
+    <% } %>
+  <% } %>
 </div>
 <%- include('partials/footer') %>

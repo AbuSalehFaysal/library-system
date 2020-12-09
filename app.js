@@ -84,6 +84,18 @@ app.get("/blogs", function (req, res) {
   });
 });
 
+app.get("/blogs/allbooks", function (req, res) {
+  // console.log(req.user);
+  Blog.find({}, function (err, blogs) {
+    if (err) {
+      console.log("ERROR: ");
+      console.log(err);
+    } else {
+      res.render("allbooks", { blogs: blogs, currentUser: req.user });
+    }
+  });
+});
+
 //NEW ROUTE
 app.get("/blogs/new", function (req, res) {
   res.render("new");
