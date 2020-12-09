@@ -51,6 +51,14 @@ var blogSchema = new mongoose.Schema({
 });
 var Blog = mongoose.model("Blog", blogSchema);
 
+var listSchema = new mongoose.Schema({
+  title: String,
+  author: String,
+  genre: String,
+  name: String,
+});
+var List = mongoose.model("List", listSchema);
+
 //TEST BLOG CREATION
 // Blog.create({
 //   title: "Test Blog",
@@ -143,6 +151,28 @@ app.post("/blogs", function (req, res) {
       res.renders("new");
     } else {
       res.redirect("/blogs");
+    }
+  });
+});
+
+app.get("/blogs/list", function(req, res){
+  List.find({}, function (err, lists) {
+    if (err) {
+      console.log("ERROR: ");
+      console.log(err);
+    } else {
+      res.render("list", { lists: lists});
+    }
+  });
+});
+
+app.post("/blogs/list", function (req, res) {
+  List.create(req.body.list, function (err, newList) {
+    if (err) {
+      console.log(err);
+      res.redirect("/blogs");
+    } else {
+      res.redirect("/blogs/list");
     }
   });
 });

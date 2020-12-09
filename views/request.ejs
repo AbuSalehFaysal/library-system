@@ -6,19 +6,19 @@
     <form class="ui form" action="/blogs/list" method="POST">
         <div class="field">
             <label for="">Book Name</label>
-            <input type="text" name="blog[title]" value="<%= blog.title %>">
+            <input type="text" name="list[title]" value="<%= blog.title %>">
         </div>
         <div class="field">
             <label for="">Author</label>
-            <input type="text" name="blog[author]" value="<%= blog.author %>">
+            <input type="text" name="list[author]" value="<%= blog.author %>">
         </div>
         <div class="field">
             <label for="">Genre</label>
-            <input type="text" name="blog[genre]" value="<%= blog.genre %>">
+            <input type="text" name="list[genre]" value="<%= blog.genre %>">
         </div>
         <div class="field">
-            <label for="">Release Date</label>
-            <input type="text" name="blog[releasedate]" value="<%= blog.releasedate %>">
+            <label for="">Student User Name</label>
+            <input type="text" name="list[name]" value="<%= currentUser.username %>">
         </div>
         <input class="ui secondary button" type="submit" value="SUBMIT">
     </form>
