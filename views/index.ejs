@@ -2,39 +2,39 @@
 <div class="ui main text container">
   <div class="ui huge header">Library Management System</div>
   <div class="ui divided items">
-    <% blogs.forEach(blog => { %>
+    <% books.forEach(book => { %>
     <div class="item">
       <div class="image">
-        <img src="<%= blog.image %> " alt="" />
+        <img src="<%= book.image %> " alt="" />
       </div>
       <div class="content">
-        <a class="header" href="/blogs/<%= blog._id %>">Name: <%= blog.title %></a><br> 
-        <a class="header" href="/blogs/<%= blog._id %>">Author: <%= blog.author %></a><br>
-        <a class="header" href="/blogs/<%= blog._id %>">Genre: <%= blog.genre %></a><br>
-        <a class="header" href="/blogs/<%= blog._id %>">Release Date: <%= blog.releasedate %></a>
+        <a class="header" href="/books/<%= book._id %>">Name: <%= book.title %></a><br> 
+        <a class="header" href="/books/<%= book._id %>">Author: <%= book.author %></a><br>
+        <a class="header" href="/books/<%= book._id %>">Genre: <%= book.genre %></a><br>
+        <a class="header" href="/books/<%= book._id %>">Release Date: <%= book.releasedate %></a>
         <div class="meta">
-          <span>Information Updated at: <%= blog.created.toDateString() %></span>
+          <span>Information Updated at: <%= book.created.toDateString() %></span>
         </div>
         <div class="description">
-          <p><%- blog.body.substring(0,100) %>...</p>
+          <p><%- book.body.substring(0,100) %>...</p>
         </div>
         <div class="extra">
-          <a class="ui blue button" href="/blogs/<%= blog._id %>"
+          <a class="ui blue button" href="/books/<%= book._id %>"
             >View Book<i class="arrow alternate circle right icon"></i
           ></a>
           <% if (currentUser) { %>
             <% if (currentUser.usertype == 'Librerian') { %>
-                <a class="ui teal button" href="/blogs/<%= blog._id %>/edit">Edit</a>
-                <% if (blog.status === 'Active') { %>
-                    <a class="ui grey button" href="/blogs/<%= blog._id %>/deactivate">Deactivate</a>
+                <a class="ui teal button" href="/books/<%= book._id %>/edit">Edit</a>
+                <% if (book.status === 'Active') { %>
+                    <a class="ui grey button" href="/books/<%= book._id %>/deactivate">Deactivate</a>
                 <% } else { %>
-                    <a class="ui green button" href="/blogs/<%= blog._id %>/activate">Activate</a>
+                    <a class="ui green button" href="/books/<%= book._id %>/activate">Activate</a>
                 <% } %> 
-                <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="POSt">
+                <form id="delete" action="/books/<%= book._id %>?_method=DELETE" method="POSt">
                     <button class="ui red button">DELETE</button>
                 </form> 
             <% } else if(currentUser.usertype == 'Student') { %>
-                <a class="ui green button" href="/blogs/<%= blog._id %>/request">Request This Book</a>
+                <a class="ui green button" href="/books/<%= book._id %>/request">Request This Book</a>
             <% } %>
         <% } %>
         </div>
@@ -44,7 +44,7 @@
   </div>
   <% if (currentUser) { %>
     <% if (currentUser.usertype == 'Student') { %>
-      <a class="ui teal button" href="blogs/allbooks">REQUEST ALL BOOKS</a> 
+      <a class="ui teal button" href="books/allbooks">REQUEST ALL BOOKS</a> 
     <% } %>
   <% } %>
 </div>

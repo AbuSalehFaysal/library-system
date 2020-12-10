@@ -1,38 +1,38 @@
 <%- include('partials/header') %>
 <div class="ui main text container segment">
     <div class="ui huge header">
-        New Blog
+        New book
     </div>
-    <form class="ui form" action="/blogs" method="POST">
+    <form class="ui form" action="/books" method="POST">
         <div class="field">
             <label for="">Book Name</label>
-            <input type="text" name="blog[title]" placeholder="Book Name">
+            <input type="text" name="book[title]" placeholder="Book Name">
         </div>
         <div class="field">
             <label for="">Author</label>
-            <input type="text" name="blog[author]" placeholder="Author">
+            <input type="text" name="book[author]" placeholder="Author">
         </div>
         <div class="field">
             <label for="">Genre</label>
-            <input type="text" name="blog[genre]" placeholder="Genre">
+            <input type="text" name="book[genre]" placeholder="Genre">
         </div>
         <div class="field">
             <label for="">Release Date</label>
-            <input type="text" name="blog[releasedate]" placeholder="Release Date">
+            <input type="text" name="book[releasedate]" placeholder="Release Date">
         </div>
         <div class="field">
             <label for="">Book Image URL</label>
-            <input type="text" name="blog[image]" placeholder="Book Image URL">
+            <input type="text" name="book[image]" placeholder="Book Image URL">
         </div>
         <div class="field">
             <label for="">Description</label>
-            <textarea name="blog[body]" id="" rows="5"></textarea>
+            <textarea name="book[body]" id="" rows="5"></textarea>
         </div>
         <div class="inline fields">
             <label for="">Status</label>
-            <input type="radio" name="blog[status]" value="Active">
+            <input type="radio" name="book[status]" value="Active">
             <label for="">Active</label>
-            <input type="radio" name="blog[status]" value="Inactive">
+            <input type="radio" name="book[status]" value="Inactive">
             <label for="">Inactive</label>
         </div>
         <input class="ui secondary button" type="submit" value="SUBMIT">

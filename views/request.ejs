@@ -1,20 +1,20 @@
 <%- include('partials/header') %>
 <div class="ui main text container segment">
     <div class="ui huge header">
-        Request form for <%= blog.title %> 
+        Request form for <%= book.title %> 
     </div>
-    <form class="ui form" action="/blogs/list" method="POST">
+    <form class="ui form" action="/books/list" method="POST">
         <div class="field">
             <label for="">Book Name</label>
-            <input type="text" name="list[title]" value="<%= blog.title %>">
+            <input type="text" name="list[title]" value="<%= book.title %>">
         </div>
         <div class="field">
             <label for="">Author</label>
-            <input type="text" name="list[author]" value="<%= blog.author %>">
+            <input type="text" name="list[author]" value="<%= book.author %>">
         </div>
         <div class="field">
             <label for="">Genre</label>
-            <input type="text" name="list[genre]" value="<%= blog.genre %>">
+            <input type="text" name="list[genre]" value="<%= book.genre %>">
         </div>
         <div class="field">
             <label for="">Student User Name</label>

@@ -13,12 +13,12 @@
             </tr>
         </thead>
         <tbody>
-          <% blogs.forEach(blog => { %>
+          <% books.forEach(book => { %>
           <tr>
             <td data-label="Name"><%= currentUser.username %> </td>
-            <td data-label="Name"><%= blog.title %> </td>
-            <td data-label="Age"><%= blog.author %></td>
-            <td data-label="Job"><%= blog.genre %></td>
+            <td data-label="Name"><%= book.title %> </td>
+            <td data-label="Age"><%= book.author %></td>
+            <td data-label="Job"><%= book.genre %></td>
           </tr>
           <% }) %>
         </tbody>

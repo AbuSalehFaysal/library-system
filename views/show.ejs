@@ -2,29 +2,29 @@
 
 <div class="ui main text container segment">
     <div class="ui huge header">
-        <%= blog.title %> 
+        <%= book.title %> 
     </div>
     <div class="ui top attached">
         <div class="item">
-            <img class="ui centered rounded image" src="<%= blog.image %>" alt="">
-            <div class="content"><span><%= blog.created.toDateString() %> </span></div>
+            <img class="ui centered rounded image" src="<%= book.image %>" alt="">
+            <div class="content"><span><%= book.created.toDateString() %> </span></div>
         </div>
         <div class="description">
-            <p><%- blog.body %> </p>
+            <p><%- book.body %> </p>
         </div>
         <% if (currentUser) { %>
             <% if (currentUser.usertype == 'Librerian') { %>
-                <a class="ui teal button" href="/blogs/<%= blog._id %>/edit">Edit</a>
-                <% if (blog.status === 'Active') { %>
-                    <a class="ui grey button" href="/blogs/<%= blog._id %>/deactivate">Deactivate</a>
+                <a class="ui teal button" href="/books/<%= book._id %>/edit">Edit</a>
+                <% if (book.status === 'Active') { %>
+                    <a class="ui grey button" href="/books/<%= book._id %>/deactivate">Deactivate</a>
                 <% } else { %>
-                    <a class="ui green button" href="/blogs/<%= blog._id %>/activate">Activate</a>
+                    <a class="ui green button" href="/books/<%= book._id %>/activate">Activate</a>
                 <% } %> 
-                <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="POSt">
+                <form id="delete" action="/books/<%= book._id %>?_method=DELETE" method="POSt">
                     <button class="ui red button">DELETE</button>
                 </form> 
             <% } else if(currentUser.usertype == 'Student') { %>
-                <a class="ui green button" href="/blogs/<%= blog._id %>/request">REQUEST THIS BOOK</a>
+                <a class="ui green button" href="/books/<%= book._id %>/request">REQUEST THIS BOOK</a>
             <% } %>
         <% } %>
         

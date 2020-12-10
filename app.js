@@ -1,5 +1,4 @@
 const express = require("express");
-const app = express();
 const bodyParser = require("body-parser");
 const User = require("./models/user");
 const mongoose = require("mongoose");
@@ -8,6 +7,31 @@ const expressSanitizer = require("express-sanitizer");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require('swagger-ui-express');
+const app = express();
+
+// Extended: https://swagger.io/specification/#infoObject
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: "Library Management System",
+      version: "1.0.1",
+      description: "My Library",
+      contact: {
+        name: "Abu Saleh Faysal"
+      },
+      servers: ["http://localhost:7000"]
+    },
+    swagger: "2.0",
+    paths: {}
+  },
+  apis: ["app.js"],
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //DATABASE CONNECTION
 mongoose.set("useNewUrlParser", true);
@@ -30,6 +54,7 @@ app.use(methodOverride("_method"));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -39,7 +64,7 @@ app.use(function(req, res, next){
 });
 
 //SCHEMA/MODEL SETUP
-var blogSchema = new mongoose.Schema({
+var bookSchema = new mongoose.Schema({
   title: String,
   author: String,
   genre: String,
@@ -49,7 +74,7 @@ var blogSchema = new mongoose.Schema({
   status: String,
   created: { type: Date, default: Date.now },
 });
-var Blog = mongoose.model("Blog", blogSchema);
+var Book = mongoose.model("Book", bookSchema);
 
 var listSchema = new mongoose.Schema({
   title: String,
@@ -59,73 +84,162 @@ var listSchema = new mongoose.Schema({
 });
 var List = mongoose.model("List", listSchema);
 
-//TEST BLOG CREATION
-// Blog.create({
-//   title: "Test Blog",
-//   image: "https://neilpatel.com/wp-content/uploads/2018/10/blog.jpg",
-//   body: "This is a test blog!!!"
+//TEST Book CREATION
+// Book.create({
+//   title: "Test Book",
+//   image: "https://neilpatel.com/wp-content/uploads/2018/10/Book.jpg",
+//   body: "This is a test Book!!!"
 // });
 
 //RESTFUL ROUTES
+
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     description:  Get All Books
+ *     responses:
+ *      '200':
+ *        description: Success 
+ */
+
 app.get("/", function (req, res) {
-  res.redirect("/blogs");
+  res.redirect("/books");
+  res.status(200);
 });
 
 //INDEX ROUTE
-app.get("/blogs", function (req, res) {
+
+/**
+ * @swagger
+ * /books:
+ *   get:
+ *     description:  Get All Books
+ *     responses:
+ *      '200':
+ *        description: Success 
+ */
+
+app.get("/books", function (req, res) {
   // console.log(req.user);
-  Blog.find({}, function (err, blogs) {
+  Book.find({}, function (err, books) {
     if (err) {
       console.log("ERROR: ");
       console.log(err);
     } else {
-      res.render("index", { blogs: blogs, currentUser: req.user });
+      res.render("index", { books: books, currentUser: req.user });
+      res.status(200);
     }
   });
 });
 
-app.get("/blogs/allbooks", function (req, res) {
+/**
+ * @swagger
+ * /books/allbooks:
+ *   get:
+ *     description:  Get All Books
+ *     responses:
+ *      '200':
+ *        description: Success 
+ */
+
+app.get("/books/allbooks", function (req, res) {
   // console.log(req.user);
-  Blog.find({}, function (err, blogs) {
+  Book.find({}, function (err, books) {
     if (err) {
       console.log("ERROR: ");
       console.log(err);
     } else {
-      res.render("allbooks", { blogs: blogs, currentUser: req.user });
+      res.render("allbooks", { books: books, currentUser: req.user });
     }
   });
 });
 
 //NEW ROUTE
-app.get("/blogs/new", function (req, res) {
+
+/**
+ * @swagger
+ * /books/new:
+ *   get:
+ *     description:  Get All Books
+ *     responses:
+ *      '200':
+ *        description: Success 
+ */
+
+app.get("/books/new", function (req, res) {
   res.render("new");
 });
 
 //NEW ROUTE
-app.get("/blogs/register", function (req, res) {
+
+/**
+ * @swagger
+ * /books/register:
+ *   get:
+ *     description:  Get All Books
+ *     responses:
+ *      '200':
+ *        description: Success 
+ */
+
+app.get("/books/register", function (req, res) {
   res.render("register");
 });
 
 //NEW ROUTE
-app.get("/blogs/login", function (req, res) {
+
+/**
+ * @swagger
+ * /books/login:
+ *   get:
+ *     description:  Get All Books
+ *     responses:
+ *      '200':
+ *        description: Success 
+ */
+
+app.get("/books/login", function (req, res) {
   res.render("login");
 });
 
 //NEW ROUTE
-app.get("/blogs/logout", function (req, res) {
+
+/**
+ * @swagger
+ * /books/logout:
+ *   get:
+ *     description:  Get All Books
+ *     responses:
+ *      '200':
+ *        description: Success 
+ */
+
+app.get("/books/logout", function (req, res) {
   req.logout();
-  res.redirect("/blogs/login");
+  res.redirect("/books/login");
 });
 
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next();
   }
-  res.redirect("/blogs/login");
+  res.redirect("/books/login");
 }
 
-//handling user sign up 
-app.post("/blogs/register", function(req, res){
+//handling user sign up
+
+/**
+ * @swagger
+ * /books/register:
+ *   post:
+ *     description:  Get All Books
+ *     responses:
+ *      '200':
+ *        description: Success 
+ */
+
+app.post("/books/register", function(req, res){
   User.register((
     {usertype: req.body.usertype,
     username: req.body.username,
@@ -137,37 +251,59 @@ app.post("/blogs/register", function(req, res){
       return res.render("register");
     } else {
       passport.authenticate('local')(req, res, () =>{
-        res.redirect('/blogs/login');
+        res.redirect('/books/login');
       });
     }
   });
 }); 
 
 //login logic 
-app.post("/blogs/login", passport.authenticate("local", {
-   successRedirect: "/blogs",
-   failureRedirect: "/blogs/login"
+
+app.post("/books/login", passport.authenticate("local", {
+   successRedirect: "/books",
+   failureRedirect: "/books/login"
   }),function(req, res){
 });
 
 
 //CREATE ROUTE
-app.post("/blogs", function (req, res) {
+
+/**
+ * @swagger
+ * /books:
+ *   post:
+ *     description:  Insert a book info
+ *     responses:
+ *      '200':
+ *        description: Success 
+ */
+
+app.post("/books", function (req, res) {
   console.log(req.body);
-  req.body.blog.body = req.sanitize(req.body.blog.body);
+  req.body.book.body = req.sanitize(req.body.book.body);
   console.log("========");
   console.log(req.body);
-  Blog.create(req.body.blog, function (err, newBlog) {
+  Book.create(req.body.book, function (err, newBlog) {
     if (err) {
       console.log(err);
       res.renders("new");
     } else {
-      res.redirect("/blogs");
+      res.redirect("/books");
     }
   });
 });
 
-app.get("/blogs/list", function(req, res){
+/**
+ * @swagger
+ * /books/list:
+ *   get:
+ *     description:  Get the list of books
+ *     responses:
+ *      '200':
+ *        description: Success 
+ */
+
+app.get("/books/list", function(req, res){
   List.find({}, function (err, lists) {
     if (err) {
       console.log("ERROR: ");
@@ -178,97 +314,118 @@ app.get("/blogs/list", function(req, res){
   });
 });
 
-app.post("/blogs/list", function (req, res) {
+/**
+ * @swagger
+ * /books/list:
+ *   post:
+ *     description:  Get the list of books
+ *     responses:
+ *      '200':
+ *        description: Success 
+ */
+
+app.post("/books/list", function (req, res) {
   List.create(req.body.list, function (err, newList) {
     if (err) {
       console.log(err);
-      res.redirect("/blogs");
+      res.redirect("/books");
     } else {
-      res.redirect("/blogs/list");
+      res.redirect("/books/list");
     }
   });
 });
 
 //SHOW ROUTE
-app.get("/blogs/:id", function (req, res) {
-  // find the blog with provide id
-  Blog.findById(req.params.id, function (err, foundBlog) {
+
+/**
+ * @swagger
+ * /books/5fd1bce491b93c2db4c9676f:
+ *   get:
+ *     description:  Get the list of books
+ *     responses:
+ *      '200':
+ *        description: Success 
+ */
+
+app.get("/books/:id", function (req, res) {
+  // find the book with provide id
+  Book.findById(req.params.id, function (err, foundBook) {
     if (err) {
       console.log(err);
     } else {
-      res.render("show", { blog: foundBlog });
+      res.render("show", { book: foundBook });
     }
   });
 });
 
 //EDIT ROUTE
-app.get("/blogs/:id/edit", isLoggedIn, function (req, res) {
-  Blog.findById(req.params.id, function (err, foundBlog) {
+app.get("/books/:id/edit", isLoggedIn, function (req, res) {
+  Book.findById(req.params.id, function (err, foundBook) {
     if (err) {
       console.log(err);
-      res.redirect("/blogs");
+      res.redirect("/books");
     } else {
-      res.render("edit", { blog: foundBlog });
+      res.render("edit", { book: foundBook });
     }
   });
 });
 
-app.get("/blogs/:id/request", isLoggedIn, function (req, res) {
-  Blog.findById(req.params.id, function (err, foundBlog) {
+app.get("/books/:id/request", isLoggedIn, function (req, res) {
+  Book.findById(req.params.id, function (err, foundBook) {
     if (err) {
       console.log(err);
-      res.redirect("/blogs");
+      res.redirect("/books");
     } else {
-      res.render("request", { blog: foundBlog });
+      res.render("request", { book: foundBook });
     }
   });
 });
 
-app.get("/blogs/:id/deactivate", isLoggedIn, function (req, res) {
-  Blog.findById(req.params.id, function (err, foundBlog) {
+app.get("/books/:id/deactivate", isLoggedIn, function (req, res) {
+  Book.findById(req.params.id, function (err, foundBook) {
     if (err) {
       console.log(err);
-      res.redirect("/blogs");
+      res.redirect("/books");
     } else {
-      res.render("deactivate", { blog: foundBlog });
+      res.render("deactivate", { Book: foundBook });
     }
   });
 });
 
-app.get("/blogs/:id/activate", isLoggedIn, function (req, res) {
-  Blog.findById(req.params.id, function (err, foundBlog) {
+app.get("/books/:id/activate", isLoggedIn, function (req, res) {
+  Book.findById(req.params.id, function (err, foundBook) {
     if (err) {
       console.log(err);
-      res.redirect("/blogs");
+      res.redirect("/books");
     } else {
-      res.render("activate", { blog: foundBlog });
+      res.render("activate", { Book: foundBook });
     }
   });
 });
 
 //UPDATE ROUTE
-app.put("/blogs/:id", function (req, res) {
-  req.body.blog.body = req.sanitize(req.body.blog.body);
-  Blog.findByIdAndUpdate(
+app.put("/books/:id", function (req, res) {
+  req.body.Book.body = req.sanitize(req.body.Book.body);
+  Book.findByIdAndUpdate(
     req.params.id,
-    req.body.blog,
+    req.body.book,
     function (err, updatedBlog) {
       if (err) {
         console.log(err);
       } else {
-        res.redirect("/blogs/" + req.params.id);
+        res.redirect("/books/" + req.params.id);
       }
     }
   );
 });
 
 //DELETE ROUTE
-app.delete("/blogs/:id", isLoggedIn, function (req, res) {
-  Blog.findByIdAndRemove(req.params.id, function (err) {
+app.delete("/books/:id", isLoggedIn, function (req, res) {
+  Book.findByIdAndRemove(req.params.id, function (err) {
     if (err) {
       console.log(err);
     } else {
-      res.redirect("/blogs");
+      res.redirect("/books");
     }
   });
 });
