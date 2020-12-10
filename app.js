@@ -133,6 +133,19 @@ app.get("/books", function (req, res) {
   });
 });
 
+app.get("/books/deactivatedbooks", function (req, res) {
+  // console.log(req.user);
+  Book.find({}, function (err, books) {
+    if (err) {
+      console.log("ERROR: ");
+      console.log(err);
+    } else {
+      res.render("deactivatedbooks", { books: books, currentUser: req.user });
+      res.status(200);
+    }
+  });
+});
+
 /**
  * @swagger
  * /books/allbooks:
@@ -405,7 +418,7 @@ app.get("/books/:id/activate", isLoggedIn, function (req, res) {
 
 //UPDATE ROUTE
 app.put("/books/:id", function (req, res) {
-  req.body.Book.body = req.sanitize(req.body.Book.body);
+  req.body.book.body = req.sanitize(req.body.book.body);
   Book.findByIdAndUpdate(
     req.params.id,
     req.body.book,

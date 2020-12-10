@@ -1,33 +1,33 @@
 <%- include('partials/header') %>
 <div class="ui main text container segment">
     <div class="ui huge header">
-        Are you sure to Activate <%= book.title %>? If yes, then click the Activate button. 
+        Are you sure to Activate <%= Book.title %>? If yes, then click the Activate button. 
     </div>
-    <form class="ui form" action="/books/<%= book._id %>?_method=PUT" method="POST">
+    <form class="ui form" action="/books/<%= Book._id %>?_method=PUT" method="POST">
         <div style="display: none;">
             <div class="field">
                 <label for="">Book Name</label>
-                <input type="text" name="book[title]" value="<%= book.title %>">
+                <input type="text" name="book[title]" value="<%= Book.title %>">
             </div>
             <div class="field">
                 <label for="">Author</label>
-                <input type="text" name="book[author]" value="<%= book.author %>">
+                <input type="text" name="book[author]" value="<%= Book.author %>">
             </div>
             <div class="field">
                 <label for="">Genre</label>
-                <input type="text" name="book[genre]" value="<%= book.genre %>">
+                <input type="text" name="book[genre]" value="<%= Book.genre %>">
             </div>
             <div class="field">
                 <label for="">Release Date</label>
-                <input type="text" name="book[releasedate]" value="<%= book.releasedate %>">
+                <input type="text" name="book[releasedate]" value="<%= Book.releasedate %>">
             </div>
             <div class="field">
                 <label for="">Image URL</label>
-                <input type="text" name="book[image]" value="<%= book.image %>">
+                <input type="text" name="book[image]" value="<%= Book.image %>">
             </div>
             <div class="field">
                 <label for="">Description</label>
-                <textarea name="book[body]" id="" rows="5"><%= book.body %></textarea>
+                <textarea name="book[body]" id="" rows="5"><%= Book.body %></textarea>
             </div>
             <div class="field">
                 <label for="">Status</label>

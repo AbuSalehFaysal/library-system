@@ -3,7 +3,7 @@
   <div class="ui huge header">Library Management System</div>
   <div class="ui divided items">
     <% books.forEach(book => { %>
-    <% if (book.status == 'Active') { %>
+    <% if (book.status == 'Inactive') { %>
      
     
     <div class="item">
@@ -46,10 +46,5 @@
     <% } %>
     <% }) %>
   </div>
-  <% if (currentUser) { %>
-    <% if (currentUser.usertype == 'Student') { %>
-      <a class="ui teal button" href="books/allbooks">REQUEST ALL BOOKS</a> 
-    <% } %>
-  <% } %>
 </div>
 <%- include('partials/footer') %>
