@@ -42,7 +42,7 @@ mongoose.connect("mongodb://localhost/RESTfulBlogApp");
 
 //APP CONFIG
 app.use(require("express-session")({
-  secret: "Rusty is the best",
+  secret: "Faysal is the best",
   resave: false,
   saveUninitialized: false
 }));
